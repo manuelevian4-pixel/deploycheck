@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeployCheck</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f0e9;
+            color: #333;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .container {
+            background: white;
+            max-width: 500px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #47745b;
+        }
+        
+        button {
+            background: #47745b;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #34583f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>DeployCheck 🚀</h1>
+
+        <p>Bem-vindo ao nosso projeto!</p>
+
+        <p>Aplicação criada para testar processos de CI/CD.</p>
+
+        <button onclick="verificar()">Testar aplicação</button>
+
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function verificar() {
+            document.getElementById("resultado").innerText =
+                "Aplicação funcionando corretamente!";
+        }
+    </script>
+</body>
+
+</html>

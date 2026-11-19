@@ -1,0 +1,28 @@
+
+name: CI-CD DeployCheck
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  testar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo do repositorio
+        uses: actions/checkout@v4
+
+      - name: Verificar se o index.html existe
+        run: test -f index.html
+
+      - name: Verificar conteudo da aplicacao
+        run: grep -q "DeployCheck" index.html
+
+      - name: Teste concluido
+        run: echo "Aplicacao validada com sucesso!"
