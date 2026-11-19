@@ -4,64 +4,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeployCheck</title>
-
+    <meta name="theme-color" content="#18372b">
+    <title>DeployCheck - Teste CI/CD</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: Arial, sans-serif;
-            background: #f3f0e9;
-            color: #333;
-            text-align: center;
-            padding: 80px 20px;
+            background: #f4f6f5;
+            color: #26352e;
         }
         
-        .container {
+        header {
+            background: #18372b;
+            color: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .online {
+            background: #d9f5e3;
+            color: #237444;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        main {
+            max-width: 1050px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+        
+        .intro {
+            margin-bottom: 30px;
+        }
+        
+        .intro h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .intro p {
+            color: #718078;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+        
+        .card,
+        .panel {
             background: white;
-            max-width: 500px;
-            margin: auto;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e5ebe7;
         }
         
-        h1 {
-            color: #47745b;
+        .card p {
+            color: #78857e;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .card h2 {
+            font-size: 23px;
+            color: #28734b;
+        }
+        
+        .panel {
+            margin-bottom: 22px;
+        }
+        
+        .panel h2 {
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .step {
+            background: #f1f6f2;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .step strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .step span {
+            font-size: 13px;
+            color: #718078;
         }
         
         button {
-            background: #47745b;
+            background: #28734b;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 13px 22px;
             border-radius: 8px;
             cursor: pointer;
+            font-size: 14px;
         }
         
         button:hover {
-            background: #34583f;
+            background: #195b38;
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        #resultado {
+            margin-top: 18px;
+            font-size: 14px;
+            color: #28734b;
+        }
+        
+        #historico {
+            margin: 15px 20px;
+            color: #52635a;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #89958e;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 600px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            .intro h1 {
+                font-size: 25px;
+            }
+            header {
+                padding: 18px 5%;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>DeployCheck 🚀</h1>
 
-        <p>Bem-vindo ao nosso projeto!</p>
+    <header>
+        <div class="logo">⚙ DeployCheck</div>
+        <div class="online">● Sistema disponível</div>
+    </header>
 
-        <p>Aplicação criada para testar processos de CI/CD.</p>
+    <main>
 
-        <button onclick="verificar()">Testar aplicação</button>
+        <section class="intro">
+            <h1>Painel de monitoramento</h1>
+            <p>Acompanhe o funcionamento e os testes da sua aplicação.</p>
+        </section>
 
-        <p id="resultado"></p>
-    </div>
+        <section class="cards">
+
+            <div class="card">
+                <p>Status da aplicação</p>
+                <h2>Online</h2>
+            </div>
+
+            <div class="card">
+                <p>Ambiente</p>
+                <h2>Desenvolvimento</h2>
+            </div>
+
+            <div class="card">
+                <p>Integração contínua</p>
+                <h2>Configurada</h2>
+            </div>
+
+            <div class="card">
+                <p>Testes realizados</p>
+                <h2 id="contador">0</h2>
+            </div>
+
+        </section>
+
+        <section class="panel">
+            <h2>Pipeline CI/CD</h2>
+
+            <div class="steps">
+
+                <div class="step">
+                    <strong>01. Integração</strong>
+                    <span>Recebimento das alterações no código.</span>
+                </div>
+
+                <div class="step">
+                    <strong>02. Testes</strong>
+                    <span>Verificação dos arquivos e da aplicação.</span>
+                </div>
+
+                <div class="step">
+                    <strong>03. Deploy</strong>
+                    <span>Etapa de publicação da aplicação.</span>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Teste da aplicação</h2>
+            <p>Execute uma verificação básica do funcionamento da página.</p>
+
+            <br>
+
+            <button id="botaoTeste" onclick="verificar()">
+            Executar teste
+        </button>
+
+            <p id="resultado" aria-live="polite">
+                Aguardando execução...
+            </p>
+
+            <div style="margin-top: 25px;">
+                <h3>Histórico de testes</h3>
+                <ul id="historico"></ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        DeployCheck © 2026 | Projeto acadêmico de CI/CD
+    </footer>
 
     <script>
+        let totalTestes = 0;
+
         function verificar() {
-            document.getElementById("resultado").innerText =
-                "Aplicação funcionando corretamente!";
+
+            const resultado = document.getElementById("resultado");
+            const historico = document.getElementById("historico");
+            const contador = document.getElementById("contador");
+            const botao = document.getElementById("botaoTeste");
+
+            botao.disabled = true;
+            resultado.textContent = "Executando teste...";
+
+            setTimeout(() => {
+
+                totalTestes++;
+
+                resultado.textContent =
+                    "✓ Teste concluído! Aplicação funcionando.";
+
+                contador.textContent = totalTestes;
+
+                const horario = new Date().toLocaleString("pt-BR");
+
+                const item = document.createElement("li");
+
+                item.textContent =
+                    "✓ Teste realizado com sucesso em " + horario;
+
+                historico.prepend(item);
+
+                botao.disabled = false;
+
+            }, 800);
         }
     </script>
+
 </body>
 
 </html>
